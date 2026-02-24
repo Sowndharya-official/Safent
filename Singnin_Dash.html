@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Safent</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f4f8fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            background: #fff;
+        }
+
+        /* Left Side Styling */
+        .image-section {
+            background-color: #205075;
+            padding: 40px;
+        }
+
+        .image-placeholder-box {
+            width: 100%;
+            height: 350px;
+            border: 4px solid #b9ddee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .brand-logo-img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .brand-tagline {
+            color: #b9ddee;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: -100px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Right Side Styling */
+        .form-control {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            padding-left: 0;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #6cacca !important;
+        }
+
+        .btn-login {
+            background-color: #6cacca;
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+            padding: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #154861;
+            color: white;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            padding: 8px 15px;
+        }
+
+        .btn-social img {
+            width: 18px;
+            height: 18px;
+        }
+
+        .divider:before, .divider:after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row login-container shadow-lg">
+        
+        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center image-section">
+            <div class="image-placeholder-box">
+                <img src="Safent-logo.png" alt="Safent Logo" class="brand-logo-img">
+                <p class="brand-tagline">Mastering Crowd Safety - Securing Every Event</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 p-5">
+            <h2 class="text-center mb-4 fw-bold" style="color: #154861;">Login</h2>
+            
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Email Address</label>
+                    <input type="email" class="form-control" id="email"required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Password</label>
+                    <input type="password" class="form-control" id="password"required>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label small" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none small text-muted">Forget Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-login w-100 mb-3">Login</button>
+                
+                <p class="text-center small">Don't have an account? <a href="CreateAccount.html" class="text-decoration-none fw-bold" style="color: #205075;">Register</a></p>
+                
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted">or</p>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button class="btn btn-outline-secondary w-100 btn-social" type="button">
+                            <img src="l.png" alt="">Sign in with Google
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-outline-secondary w-100 btn-social" type="button">
+                            <img src="n.png" alt="">Sign in with X
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAaObKAGlnS_CYpZLjkpaE-VitOtJ4HBus",
+        authDomain: "safent-9e0bb.firebaseapp.com",
+        projectId: "safent-9e0bb",
+        appId: "1:799950088915:web:2cfeaf3ba40a639c680226"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            alert("Login successful!");
+            window.location.href = "Dashboard_verification.html";
+        } catch (error) {
+            console.error(error);
+            if (error.code === "auth/invalid-credential") {
+                alert("Invalid email or password.");
+            } else {
+                alert("Error: " + error.message);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

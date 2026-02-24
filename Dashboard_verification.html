@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Crowd Safety | Event Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #205075;
+            --accent: #158611;
+            --light-blue: #6cacca;
+            --deep-teal: #154861; /* New color from your request */
+            --bg-gray: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #205075;
+        ;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+      .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 5%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary);
+        }
+.logo-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Centers everything vertically */
+    gap: 12px;
+}
+        /* Update this container */
+.logo-container {
+    width: 90px;        /* Increased from 66px to make it bigger */
+    height: 90px;       /* Increased height */
+    position: absolute; /* Allows it to overlap without pushing the header down */
+    top: 5px;           /* Adjusts vertical position within the navbar */
+    left: 5%;           /* Matches your navbar padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;      /* Ensures it stays on top of the navbar shadow */
+}
+
+/* Update the logo image itself */
+.main-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Add this to move the text to the right so the bigger logo doesn't cover it */
+.header-text {
+    font font-weight: 700;
+    margin-left: 70px; /* Adjust this based on your new logo width */
+}
+
+        /* --- Profile Section --- */
+        .profile-container { position: relative; cursor: pointer; }
+        .user-profile {
+            display: flex; align-items: center; gap: 12px;
+            background: #f1f5f9; padding: 6px 15px; border-radius: 30px;
+            transition: background 0.3s;
+        }
+        .user-profile:hover { background: #e2e8f0; }
+        .user-info { text-align: right; }
+        .user-info .name { display: block; font-weight: 700; font-size: 0.9rem; color: var(--primary); }
+        .avatar { width: 35px; height: 35px; background: var(--light-blue); border-radius: 50%; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; color: white; }
+
+        /* --- Dropdown Menu --- */
+        .dropdown-menu {
+            position: absolute; top: calc(100% + 10px); right: 0;
+            width: 200px; background: var(--white); border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;
+            display: none; flex-direction: column; padding: 10px 0; z-index: 1100;
+        }
+        .dropdown-menu.active { display: flex; animation: slideDown 0.2s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .dropdown-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-size: 0.9rem; }
+        .dropdown-item:hover { background: #f8fafc; color: var(--primary); }
+
+        /* --- Main Content --- */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px; }
+        .section-header h2 { color: var(--primary); font-size: 1.7rem; border-left: 5px solid var(--accent); padding-left: 15px; }
+        
+        .search-wrapper { position: relative; width: 100%; max-width: 400px; }
+        .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--light-blue); }
+        .search-input {
+            width: 100%; padding: 12px 20px 12px 45px;
+            border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem;
+            transition: 0.3s; outline: none;
+        }
+
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(32, 80, 117, 0.1); }
+        /* --- Event Grid --- */
+        .event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--white); border-radius: 15px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card-banner { height: 130px; background: linear-gradient(135deg, var(--primary), var(--light-blue)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; }
+        .card-content { padding: 20px; }
+        .card-content h3 { color: var(--primary); margin-bottom: 12px; font-size: 1.2rem; }
+        .event-info { display: flex; align-items: center; gap: 10px; color: #64748b; font-size: 0.85rem; margin-bottom: 8px; }
+
+        .btn-register {
+            display: block; width: 100%; padding: 12px; margin-top: 15px;
+            background-color: var(--primary); color: white; text-align: center;
+            border-radius: 8px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s;
+        }
+        .btn-register:hover { background-color: var(--accent); }
+
+        /* --- INNOVATIVE VERIFICATION MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(21, 72, 97, 0.85); /* Deep Teal transparency */
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; backdrop-filter: blur(8px);
+        }
+        .modal-box {
+            background: var(--white); padding: 40px; border-radius: 20px;
+            max-width: 500px; width: 90%; text-align: center;
+            border: 3px solid var(--light-blue);
+            animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .modal-box h3 { color: var(--primary); margin-bottom: 15px; }
+        .event-name-tag { 
+            display: block; font-size: 1.5rem; color: var(--deep-teal); 
+            font-weight: 800; margin: 15px 0; padding: 10px;
+            background: #f0f7ff; border-radius: 10px;
+        }
+
+        .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
+        .btn-yes { background: var(--primary); color: white; padding: 12px 40px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+        .btn-no { background: #e2e8f0; color: var(--text-dark); padding: 12px 40px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+        .btn-yes:hover { background: var(--accent); }
+        .btn-no:hover { background: #cbd5e1; }
+
+        .logo-link, .logo-link:visited {
+    color: inherit; /* Keeps your text the original colors */
+    cursor: pointer; 
+}
+    </style>
+</head>
+<body>
+
+ <nav class="navbar">
+<a href="Dashboard_verification.html" class="logo-link" style="text-decoration: none; display: flex; align-items: center;">
+ <div class="logo-group">
+ <div class="logo-container">
+ <img src="Safent-logo.png" alt="Safent Logo" class="main-logo">
+ </div>
+ <div class="header-text">
+ <p><strong>Mastering Crowd Safety</strong></p>
+ <p><strong>Securing Every Event</strong></p>
+</div>
+</div>
+</a> 
+        <div class="profile-container" id="profileToggle">
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="name">John Doe</span>
+                    <span class="id">ID: 1102-SF</span>
+                </div>
+                <div class="avatar"><i class="fas fa-user"></i></div>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="MyAccount.html" class="dropdown-item"><i class="fas fa-user-circle"></i> My Account</a>
+                <a href="Settings.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                <a href="logout.html" class="dropdown-item" style="color:red;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+            <header class="section-header">
+            <h2>Upcoming Events</h2>
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="eventSearch" class="search-input" placeholder="Search events by name...">
+            </div>
+        </header>
+        </header>
+        <div class="event-grid" id="eventGrid"></div>
+    </main>
+
+    <div class="modal-overlay" id="verificationModal">
+        <div class="modal-box">
+            <h3>Are you sure you want to register?</h3>
+            <span id="modalEventName" class="event-name-tag"></span>
+            <div class="modal-actions">
+                <button class="btn-yes" onclick="confirmRegistration()">Yes</button>
+                <button class="btn-no" onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const events = [
+            { title: "Cultural Festival", icon: "fa-masks-theater", date: "Oct 12, 2026", location: "Central Park Plaza" },
+            { title: "Sports event (Cricket)", icon: "fa-baseball-bat-ball", date: "Oct 28, 2026", location: "International Stadium" },
+            { title: "Music Concert", icon: "fa-guitar", date: "Nov 05, 2026", location: "Grand Symphony Hall" },
+            { title: "Inauguration", icon: "fa-ribbon", date: "Nov 20, 2026", location: "City Convention Center" }
+        ];
+
+        const grid = document.getElementById('eventGrid');
+        const searchInput = document.getElementById('eventSearch');
+        const profileToggle = document.getElementById('profileToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const modal = document.getElementById('verificationModal');
+        const modalName = document.getElementById('modalEventName');
+
+        // --- Dropdown Logic ---
+        profileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('active');
+        });
+
+        window.addEventListener('click', () => {
+            dropdownMenu.classList.remove('active');
+        });
+
+        // --- Display Events ---
+        function displayEvents(data) {
+            grid.innerHTML = data.map(ev => `
+                <div class="card">
+                    <div class="card-banner"><i class="fas ${ev.icon}"></i></div>
+                    <div class="card-content">
+                        <h3>${ev.title}</h3>
+                        <div class="event-info"><i class="far fa-calendar-alt"></i> <span>${ev.date}</span></div>
+                        <div class="event-info"><i class="fas fa-map-marker-alt"></i> <span>${ev.location}</span></div>
+                        <button class="btn-register" onclick="triggerVerification('${ev.title}')">Register Now</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- Modal Functions ---
+        function triggerVerification(name) {
+            modalName.innerText = name;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function confirmRegistration() {
+            window.location.href = "Role.html";
+        }
+
+        displayEvents(events);
+
+        // Search Filter
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = events.filter(ev => ev.title.toLowerCase().includes(term));
+            displayEvents(filtered);
+        });
+    </script>
+</body>
+</html>

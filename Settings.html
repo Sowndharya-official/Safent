@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Safent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #205075; /* Your Darker Primary Color */
+            --accent: #158611;
+            --light-blue: #6cacca;
+            --bg-gray: #f0f4f8;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        /* --- Navbar Styles --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 5%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 75px;
+            border-bottom: 3px solid var(--primary); /* Updated to Darker Color */
+        }
+/* Update this container to center the logo and make it larger */
+.logo-container {
+    width: 100px;        /* Increased size to make it bigger */
+    height: 100px;       /* Increased height */
+    position: absolute;  
+    top: 50%;            /* Position the top at the middle of the navbar */
+    transform: translateY(-50%); /* Pull it back up by half its height to perfect center */
+    left: 5%;           
+    z-index: 1001;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure the logo maintains its aspect ratio */
+.main-logo { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
+/* Update the logo group to align items in the absolute center */
+.logo-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* This centers the whole text block vertically with the logo */
+    gap: 12px;
+    height: 100%;       /* Ensures it uses the full height of the container */
+}
+
+/* Update the text block to be a centered column */
+.header-text {
+    margin-left: 90px;  /* Keep this to clear the larger absolute logo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the two lines of text relative to each other */
+}
+
+/* Remove all default spacing from the p tags */
+.header-text p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;    /* Tightens the gap between the two lines */
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+        /* Updated Back Button to Darker Color */
+        .btn-back {
+            text-decoration: none;
+            color: var(--primary); /* Changed to Darker Primary Blue */
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .btn-back:hover { 
+            color: var(--light-blue);
+            transform: translateX(-5px); 
+        }
+
+        /* --- Settings Container --- */
+        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        
+        /* Updated Card with Darker Outline */
+        .settings-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            border: 2px solid var(--primary); /* Darker Outline Added */
+            box-shadow: 0 10px 25px rgba(32, 80, 117, 0.1); 
+        }
+
+        h2 { color: var(--primary); margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
+
+        /* Interactive Setting Rows */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            background: #fff;
+            border: 1px solid #eef2f6;
+            transition: all 0.3s ease;
+        }
+
+        .setting-row:hover {
+            border-color: var(--primary); /* Darker Outline on Hover */
+            transform: translateY(-2px);
+        }
+
+        .info h4 { color: var(--primary); margin-bottom: 5px; }
+        .info p { font-size: 0.85rem; color: #718096; }
+
+        /* Toggle Switches */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 54px;
+            height: 28px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px; width: 20px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        .btn-save-glow {
+            background: var(--primary); /* Darker Save Button */
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-save-glow:hover {
+            background: var(--light-blue);
+            transform: scale(1.01);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container" onclick="location.href='Dashboard_verification.html'">
+            <img src="Safent-logo.png" alt="Safent Logo" class="main-logo">
+        </div>
+        <div class="header-text">
+            <p>Mastering Crowd Safety</p>
+            <p>Securing Every Event</p>
+        </div>
+        <a href="Dashboard_verification.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </nav>
+
+    <main class="container">
+        <div class="settings-card">
+            <h2><i class="fas fa-cog" style="color:var(--primary)"></i> System Settings</h2>
+
+            <div class="setting-row">
+                <div class="info">
+                    <h4>High Risk Alerts</h4>
+                    <p>Enable sound alerts for critical crowd levels.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="risk_alert">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="info">
+                    <h4>Privacy Mode</h4>
+                    <p>Hide your exact location from other event staff.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="privacy_mode">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <button class="btn-save-glow" onclick="applySettings()">Save System Preferences</button>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('risk_alert').checked = localStorage.getItem('alert_pref') === 'true';
+            document.getElementById('privacy_mode').checked = localStorage.getItem('privacy_pref') === 'true';
+        };
+
+        function applySettings() {
+            localStorage.setItem('alert_pref', document.getElementById('risk_alert').checked);
+            localStorage.setItem('privacy_pref', document.getElementById('privacy_mode').checked);
+            
+            const btn = document.querySelector('.btn-save-glow');
+            btn.innerHTML = 'Settings Saved Successfully!';
+            btn.style.background = '#158611';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Save System Preferences';
+                btn.style.background = '#205075';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
