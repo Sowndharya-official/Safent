@@ -1,2 +1,0 @@
-# Safent
-Crowd Management Website
