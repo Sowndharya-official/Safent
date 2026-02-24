@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out | Safent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #205075;
+            --light-blue: #6cacca;
+            --bg-gray: #f0f4f8;
+            --white: #ffffff;
+            --accent: #158611;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-gray);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Logout Card with Dark Outline --- */
+        .logout-card {
+            background: var(--white);
+            width: 90%;
+            max-width: 450px;
+            padding: 50px 40px;
+            border-radius: 24px;
+            border: 3px solid var(--primary); /* Darker Outline */
+            box-shadow: 0 20px 40px rgba(32, 80, 117, 0.2);
+            text-align: center;
+            animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48);
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: #f0f7ff;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            border: 2px solid var(--light-blue);
+        }
+
+        h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.8rem; }
+        p { color: #64748b; margin-bottom: 35px; line-height: 1.5; }
+
+        /* Interactive Login Button */
+        .btn-relogin {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-weight: 800;
+            width: 100%;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-relogin:hover {
+            background: var(--light-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 172, 202, 0.4);
+        }
+
+        .btn-relogin i { transition: transform 0.3s; }
+        .btn-relogin:hover i { transform: translateX(5px); }
+
+    </style>
+</head>
+<body>
+
+    <div class="logout-card">
+        <div class="icon-box">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h2>Logged Out</h2>
+        <p>You have been safely signed out of your session. Thank you for using Safent for your crowd management needs.</p>
+
+        <a href="home.html" class="btn-relogin">
+            Return to Home Page <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+</body>
+</html>

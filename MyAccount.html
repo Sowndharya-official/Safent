@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Mastering Crowd Safety</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #205075;
+            --accent: #158611;
+            --light-blue: #6cacca;
+            --bg-gray: #6cacca;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Matching Navbar --- */
+        /* --- CSS Changes to Match Dashboard --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 5%;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--primary);
+    height: 70px; /* Keep height consistent with dashboard */
+}
+
+.logo-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+/* Perfect vertical centering for the logo */
+.logo-container {
+    width: 100px;        /* Slightly larger for visibility */
+    height: 100px; 
+    position: absolute; 
+    top: 50%;            /* Start at the vertical midpoint of the navbar */
+    transform: translateY(-50%); /* Pull back up by exactly half its own height */
+    left: 5%;           
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+/* Center the text block relative to the logo's center line */
+.header-text {
+    margin-left: 90px;  /* Clearance for the larger logo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the two lines of text */
+    height: 100%;
+}
+
+.header-text p {
+    margin: 0;
+    line-height: 1.2;    /* Balanced spacing between title and tagline */
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.main-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.btn-back {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+        .btn-back:hover { color: var(--light-blue); }
+
+        /* --- Account Page Content --- */
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .account-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+
+        .profile-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .profile-avatar {
+            width: 120px; height: 120px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: white;
+            border: 4px solid var(--primary);
+        }
+
+        .profile-card h2 { color: var(--primary); margin-bottom: 5px; }
+
+        .details-card {
+            background: var(--white); padding: 40px;
+            border-radius: 20px; border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .details-card h3 { 
+            color: var(--primary); margin-bottom: 25px; 
+            border-bottom: 2px solid var(--light-blue); padding-bottom: 10px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+        .form-group input {
+            width: 100%; padding: 12px;
+            border: 2px solid #e2e8f0; border-radius: 8px;
+            font-size: 1rem; outline: none; background-color: #fcfdfe;
+        }
+
+        .btn-save {
+            background: var(--primary); color: white;
+            padding: 14px 30px; border: none; border-radius: 8px;
+            font-weight: 700; cursor: pointer; transition: 0.3s; width: 100%;
+        }
+        .btn-save:hover { background: var(--accent); }
+
+        @media (max-width: 768px) { .account-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+   <nav class="navbar">
+    <a href="Dashboard_verification.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+        <div class="logo-group">
+            <div class="logo-container">
+                <img src="Safent-logo.png" alt="Safent Logo" class="main-logo">
+            </div>
+            <div class="header-text">
+                <p>Mastering Crowd Safety</p>
+                <p>Securing Every Event</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="Dashboard_verification.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+</nav>
+
+    <main class="container">
+        <div class="account-grid">
+            <aside class="profile-card">
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+                <h2 id="display_name">John Doe</h2>
+                <p>Member Since Feb 2026</p>
+                <div style="text-align: left; margin-top: 20px;">
+                    <p><strong>Verified:</strong> Yes <i class="fas fa-check-circle" style="color:var(--accent)"></i></p>
+                </div>
+            </aside>
+
+            <section class="details-card">
+                <h3>Personal Information</h3>
+                <form id="accountForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="input_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="input_email">
+                    </div>
+                    <div class="form-group">
+                        <label>User ID</label>
+                        <input type="text" value="1102-SF" disabled style="background:#f1f5f9;">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="input_phone" value="+91 98765 43210">
+                    </div>
+                    <button type="button" class="btn-save" onclick="saveData()">Update Profile</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Load data on page start
+        window.onload = function() {
+            const savedName = localStorage.getItem('userName') || "John Doe";
+            const savedEmail = localStorage.getItem('userEmail') || "john.doe@safent.com";
+            const savedPhone = localStorage.getItem('userPhone') || "+91 98765 43210";
+
+            document.getElementById('display_name').innerText = savedName;
+            document.getElementById('input_name').value = savedName;
+            document.getElementById('input_email').value = savedEmail;
+            document.getElementById('input_phone').value = savedPhone;
+        };
+
+        function saveData() {
+            const newName = document.getElementById('input_name').value;
+            const newEmail = document.getElementById('input_email').value;
+            const newPhone = document.getElementById('input_phone').value;
+
+            // Save to browser memory
+            localStorage.setItem('userName', newName);
+            localStorage.setItem('userEmail', newEmail);
+            localStorage.setItem('userPhone', newPhone);
+
+            // Update the sidebar heading instantly
+            document.getElementById('display_name').innerText = newName;
+
+            alert("Changes saved successfully!");
+        }
+    </script>
+</body>
+</html>
